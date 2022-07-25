@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Home | Page</title>
+    </h:head>
+    <h:head>
+        <title>Home Page</title>
+
+        <style>
+            .Background{
+                background-color: #85b2cb;
+                width:1340px;
+                height:auto;
+            }
+            .footer{
+
+
+                background-color: #0d3180;
+                width:1340px;
+                height:auto; 
+            }
+            .contain{
+                width: 1340px;
+                height: 650px;
+                background-color: silver;
+                float: left;
+
+            }
+            .slide1{
+                width: 450px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .slide2{
+                width: 500px;
+                height: 100%;
+                background-color:azure;
+                float: left;
+
+            }.slide3{
+                width: 390px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .banner{
+
+            }
+            #menu{
+                background-color:#7d9aab;
+                width:1340px;
+                height:40px;
+                display: inline-block;
+                list-style: none;
+
+            }
+
+            #menu li{
+                float:left;
+                padding-right: 100px;
+                list-style:none;
+                text-align: 100px;
+            }
+            a:link{
+                color: white;
+                text-decoration: none;
+            }
+            a:visited{
+                color: white;
+            }
+
+            #b{
+                margin-left:1000px;
+                margin-right:350px;
+                float: right;
+
+            }
+
+            dt{
+                margin-left: 500px;
+            }
+            img{
+                margin-left: 0px;
+
+            }
+            #text{
+                width: 100%;
+                height:auto;
+                height: 350px;
+                background-color:none;
+            }
+
+
+        </style>
+    </h:head>
+    <h:body>
+        <div class="Background">
+            <div class="MainBlock">
+                <div class="banner">
+                    <img src="logo.PNG" width="1340px" height="80px" />
+
+
+                </div>
+                <div >
+                    <center><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></center>
+                <div style="margin-top:5px;"></div>
+                <h:form>
+                <p:menubar  style="background:goldenrod" autoDisplay="true" >
+                     <p:menuitem value="Home" icon="ui-icon-home" outcome="home.xhtml"/>
+                    <p:menuitem value="AboutUs" icon="ui-icon-person"  outcome="About.xhtml"/>
+                    
+                    <p:menuitem value="Login" icon="ui-icon-person"  outcome="Login.xhtml"/>
+                    
+                    <p:menuitem value="Logout" icon="ui-icon-circle-close"  onclick=" return confirm('Are you sure to Logout of the System?}')" style="background-color: red;" outcome="home.xhtml"/>
+                </p:menubar>
+</h:form>
+                </div>
+            </div>
+
+        </div>
+        <div class="contain">
+                 
+                <p:layout  styleClass="kiki" style="margin-left: 60px;">
+                  
+                     <p:layoutUnit  position="center" style="border: 1px solid white;">
+                    <div class="twoo" style="height: 600px; width: 30%;border:1px solid white; border-radius: 5px; margin-top: 5px; float: left;clear: left; margin-left: 5px;">
+                        <div style="width: 80%; margin: auto; height: 110%">
+                            <h2 style="color: #ffcc66;">Vision and Mission</h2>
+                            <p>
+                                Rwanda Cooperative Agency (RCA) is a public institution which is in charge<br/> of promotion, Registration and Regulation of Cooperatives in the Country
+                            </p>
+                            <h3 style="color: #ffcc66;">VISION :</h3>
+                            <p>
+                                To promote an automous and economically viable cooperative movement founded on the cooperative values and principles and is able to enhance social integration and uplifting the standard of living of its members.
+                            </p>
+                            <h3 style="color:#ffcc66">MISSION :</h3>
+                            <p>
+
+                                To develop the cooperative sector such as it serves its members equitably,<br/> efficiently and empowers them economically
+
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="twoa" style="height: 600px;background: skyblue; width: 64%; border-radius: 5px; margin-top: 5px; float: left;clear: right; margin-left: 5px; text-align: center;">
+                        <center>
+                            <h2 style="font-family: serif; font-size: x-large;">READ SOME OF OUR VISION AND MISSION</h2>
+                        </center>
+                        <p:imageSwitch effect="fade" style="width:62%;height:30px; margin: 0px 0px 0px 30px;">
+                            <ui:repeat value="" var="image">
+                                <img src="coopera1.PNG" height="500px" width="880px"/>
+                            </ui:repeat>
+                        </p:imageSwitch>
+                    </div>
+                
+            
+            </p:layoutUnit>
+                </p:layout>
+
+        </div>
+        <div   class="footer">
+            <center>
+                <p><b style="color: #7096ab"> <h1>You are Most Welcome !!!</h1></b></p>
+                <h2 style="color: #7096ab" size="34px">Clemence Niyigena 2018 @AUCA ...</h2>
+            </center>
+
+        </div>
+
+    </h:body>
+</html>
+
+
+

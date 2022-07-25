@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view contentType="text/html">
+        <h:head>
+            <title>Facelet Title</title>
+            <style>
+                #first{
+                    background: url(mhcpic.jpg);
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    height: 100px;
+                    width: 95%;
+                    margin: auto;
+                    border-radius: 5px;
+                    border: 1px solid blueviolet; 
+                }
+                #main{
+                    height: 300px;
+                    width: 90%;
+                    margin: auto;
+                    margin-top: 20px;
+                    border: 1px solid blueviolet;
+                    border-radius: 5px;
+                }
+                #main .inside1{
+                    height: 90%;
+                    width: 60%;
+                    
+
+                }
+                #main .inside1 .kiki{
+                    margin-left: 150px;
+                    margin-top: 100px;
+                }
+
+                
+            </style>
+        </h:head>
+        <h:body style="background: skyblue">
+
+            <h:form>
+                <p:growl id="msg"/>
+                <div id="first">
+                    <img src="logo.PNG" style="height: 98px;width: 1410px; margin-left: 0px"/>
+                    
+                </div>
+                <div style="margin-top:5px;"></div>
+                <p:menubar style=" margin-top: 5px;width: 95%;margin: auto;border: 1px solid black; background:goldenrod" autoDisplay="true" >
+                    <p:menuitem value="Home" icon="ui-icon-home" outcome="HomePage.xhtml"/>
+                    <p:menuitem value="AboutUs" icon="ui-icon-person"  outcome="Aboutus.xhtml"/>
+                    <p:submenu label="Create account" icon="fa fa-fw fa-edit" >
+                        <p:menuitem value="Admin" icon="ui-icon-person"  outcome="createaccountadmin.xhtml"/>
+                        <p:menuitem value="District officer" icon="ui-icon-person" outcome="Dcoaccount.xhtml" />
+                        <p:menuitem value="Sector officer" icon="ui-icon-person" outcome="ScoAccount.xhtml" />
+                        
+                    </p:submenu>
+                    
+                    <p:menuitem value="Logout" icon="fa fa-sign-in" onclick=" return confirm('Are you sure to Logout of the System?}')"  style="background: red" outcome="HomePage.xhtml"/>
+                </p:menubar>
+                <p:messages/>
+  
+                    
+                    
+                <p:layout  styleClass="kiki" style="margin-left: 60px;">
+                  
+                     <p:layoutUnit  position="center" style="border: 1px solid white;">
+                    <div class="twoo" style="height: 600px; width: 30%;border:1px solid white; border-radius: 5px; margin-top: 5px; float: left;clear: left; margin-left: 5px;">
+                        <div style="width: 80%; margin: auto; height: 110%">
+                            <h2 style="color: #ffcc66;">Vision and Mission</h2>
+                            <p>
+                                Rwanda Cooperative Agency (RCA) is a public institution which is in charge<br/> of promotion, Registration and Regulation of Cooperatives in the Country
+                            </p>
+                            <h3 style="color: #666666;">VISION :</h3>
+                            <p>
+                                To promote an automous and economically viable cooperative movement founded on the cooperative values and principles and is able to enhance social integration and uplifting the standard of living of its members.
+                            </p>
+                            <h3 style="color: #666666">MISSION :</h3>
+                            <p>
+
+                                To develop the cooperative sector such as it serves its members equitably,<br/> efficiently and empowers them economically
+
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="twoa" style="height: 600px;background: skyblue; width: 64%; border-radius: 5px; margin-top: 5px; float: left;clear: right; margin-left: 5px; text-align: center;">
+                        <center>
+                            <h2 style="font-family: serif; font-size: x-large;">READ SOME OF OUR VISION AND MISSION</h2>
+                        </center>
+                        <p:imageSwitch effect="fade" style="width:62%;height:30px; margin: 0px 0px 0px 30px;">
+                            <ui:repeat value="" var="image">
+                                <img src="coopera1.PNG" height="500px" width="880px"/>
+                            </ui:repeat>
+                        </p:imageSwitch>
+                    </div>
+                
+            
+            </p:layoutUnit>
+                </p:layout>
+
+               
+               
+                
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
+

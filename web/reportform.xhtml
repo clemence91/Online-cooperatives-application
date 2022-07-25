@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   <h:head>
+            <title>Sector report</title>
+            <style>
+                  body{
+              /*  background:url('pictures/moto2.bmp') no-repeat;
+                background-size:cover;*/
+                font-family: Arial;
+                color: white;
+            }
+            #first{
+                    
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    height: 90px;
+                    width: 100%;
+                    margin: auto;
+                    border:1px solid black;
+                    border-radius: 5px;
+                }
+            #third{
+                background: goldenrod;
+                    height: 50px;
+                    width: 100%;
+                    margin:auto;
+                    margin-top:150px;
+                    text-align: center;
+                    border:1px solid black;
+                    border-radius: 5px;
+                }
+            #jj {
+                color: green;
+                 font-family: Arial;
+                 
+                  font-style: oblique;
+                  font-weight: bold;
+                  max-height: 0px;
+                  padding-top: 0px;
+                  padding-bottom: 0px;
+                  
+            }
+            .yy{
+                font-size:x-large;
+                  font-style: normal;
+                  font-weight: bold;
+            }
+            #msg{
+                color: tomato;
+            }
+
+            </style>
+        </h:head>
+    <h:body style="background: skyblue">
+        <h:form id="out">
+                <p:growl id="sms" autoUpdate="true" showDetail="false"/>
+                <div id="first">
+                    <img src="logo.PNG" height="90px" width="1490px"/>
+                </div>
+                <center>     <h4 id="jj" >ONLINE COOPERATIVES REGISTRATION  MANAGEMENT INFORMATION SYSTEM</h4></center>
+                <p:menubar styleClass="matts" style="background: goldenrod;width: 100%;border: 1px solid black;">
+                    <p:menuitem value="Home" icon="ui-icon-home" outcome="home.xhtml"/>
+                    <p:menuitem value="Login" icon="ui-icon-person"  outcome="Login.xhtml"/>
+                    <p:menuitem value="Report" icon="ui-icon-print"  outcome="reportform.xhtml"/>
+                    <p:menuitem value="Logout" icon="ui-icon-circle-close"  onclick=" return confirm('Are you sure to Logout of the System?}')"  style="background-color: red;" outcome="home.xhtml"/>
+                    
+                </p:menubar> 
+                <p:layout  styleClass="kiki">
+                    <p:layoutUnit position="west" size="300" header="Profile" style="text-align: center;border: 1px solid black;">
+                        <div style="height: 30px;">
+                        </div>
+                        <center>
+                            <p:panelGrid columns="2" style="width: 90%;margin: auto;">
+
+
+                                <f:facet name="header">
+                                    <center>     <p:graphicImage value="images.png" style="border-radius: 60%;width: 50%;height: 90%;"/></center>
+                                </f:facet>
+
+
+                                <h:outputLabel value="Username"/>
+                                <h:outputLabel value="#{login.username}"/>
+
+                                <h:outputLabel value="Names"/>
+                                <h:outputLabel value="#{login.sco.fname} #{login.sco.lname}"/>
+
+                                <h:outputLabel value="Access"/>
+                                <h:outputLabel value="Sco"/>
+
+                            </p:panelGrid>
+                        </center>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center" size="600" style="border: 1px solid blueviolet;">
+                        <p:dataTable value="#{login.pendingCooperative}" var="reque">
+                            <p:column headerText="Tinno">
+                                #{reque.tinno}
+                            </p:column>
+                            <p:column headerText="Name">
+                                #{reque.name}
+                            </p:column>
+                            <p:column headerText="Activity">
+                                #{reque.activity}
+                            </p:column>
+                            <p:column headerText="REgDate">
+                                #{reque.regdate}
+                            </p:column>
+                            <p:column headerText="member">
+                                #{reque.membernumber}
+                            </p:column>
+                            <p:column headerText="Mission">
+                                #{reque.mission}
+                            </p:column>
+                            <p:column headerText="Vision">
+                                #{reque.vision}
+                            </p:column>
+                            <p:column headerText="Investement">
+                                #{reque.investement}
+                            </p:column>
+                            <p:column headerText="Type">
+                                #{reque.type}
+                            </p:column>
+                            <p:column headerText="Request Date" style="width:100px;">
+                                <center>
+                                    #{reque.requestDate}
+                                </center>
+                            </p:column>
+
+
+
+                            <p:column headerText="Document" style="width:100px;">
+                                <center>
+                                    <p:commandButton icon="ui-icon-circle-arrow-s" id="bk" 
+                                                     onclick="PF('files').show()" style="border-radius: 50%;" action="#{login.viewFiles(reque)}" update=":files">
+                                        <f:ajax event="click" listener="#{login.addFileName()}" render="files"/>
+                                    </p:commandButton>
+                                
+                                </center>
+                            </p:column>
+                            <p:column headerText="Actions" style="width: 100px;">
+                                <center>
+                                    <p:commandButton icon="ui-icon-check" id="check" style="border-radius: 60%;" action="#{login.approverequest(reque)}" update="@all"/>
+                                    <p:tooltip value="Approve request" for="check" position = "left"/>
+                                    <p:commandButton icon="ui-icon-close" id="close" style="border-radius: 60%;" oncomplete="PF('reason').show()" action="#{login.downloadCooperative(reque)}"/>
+                                    <p:tooltip value="reject request" for="close" position= "top"/>
+                                </center>
+                            </p:column>
+                        </p:dataTable>
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form>
+
+            <h:form>
+                <p:dialog resizable="true" showEffect="clip" hideEffect="clip" widgetVar="reason">
+                    <f:facet name="header">
+                        Rejection reason
+                    </f:facet>
+                    <p:inputTextarea placeholder="Provide Rejection reason" cols="80" rows="8" value="#{login.cooperative.comment}"/><br/>
+                    <p:commandButton value="record" icon="ui-icon-check" style="margin-top:20px;" iconPos="right" oncomplete="PF('reson').close()" action="#{login.updateRrequest()}" update="@all"/>
+                </p:dialog>
+            </h:form>
+            
+            <p:dialog resizable="false" showEffect="slide" hideEffect="clip" widgetVar="files"
+                      header="All cooperative Files" onShow="#{login.loadi()}">
+                <h:form id="files">
+                    
+                    <p:outputLabel value="#{login.cooperative.name}"/>
+                    <p:commandButton action="#{login.addFileName()}" value="View Files" update="tableFile"/>
+                        <p:dataTable value="#{login.allFileNames}" var="files" id="tableFile">
+                            <p:column headerText="File name" style="width:100px;">
+                                <center>
+                                    #{files.name}
+                                </center>
+                            </p:column>
+                            <p:column headerText="OPEN FILE" style="width:100px;">
+                                <center>
+                                    <p:commandButton ajax="false"  value="download"  action="#{login.download(files)}"/>
+                                </center>
+                            </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:dialog>
+              <p:toolbar style="font-size:  12px;margin-top: 400px; width: 300px;align-content: center" id="to">
+            
+                  <p:toolbarGroup  >
+                      <h:form >
+                    <center>
+                        <p:panelGrid columns="2">
+                       
+                            <p:selectOneMenu value="#{report.test}" style="width: 82%;">
+                            <f:selectItem itemLabel="Choose sector" noSelectionOption="true"/>
+                            <f:selectItems value="#{report.sectors}" var="s" itemLabel="#{s.sectname}" itemValue="#{s.sectname}"/>
+                        </p:selectOneMenu>
+                            <p:commandButton value="REPORT" action="#{report.createPDF()}" ajax="false"/>
+                    </p:panelGrid>
+                    </center>
+                </h:form>
+            </p:toolbarGroup>
+        </p:toolbar>
+     <p/>
+                   
+                   
+<div id="third"> 
+                    <h4 style="font-family: sans-serif; color: black"> Copy right Made By NIYIGENA CLEMENCE &copy; 2018 Allright Reserverd</h4>
+                </div>
+         
+     
+    </h:body>
+</html>
+
+
+

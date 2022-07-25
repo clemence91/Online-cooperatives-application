@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Admin | Approver</title>
+    </h:head>
+    <h:head>
+        <title>Home Page</title>
+
+        <style>
+            .Background{
+                background-color: #85b2cb;
+                width:1340px;
+                height:auto;
+            }
+            .footer{
+
+
+                background-color: #0d3180;
+                width:1340px;
+                height:auto; 
+            }
+            .contain{
+                width: 1340px;
+                height: 500px;
+                background-color: silver;
+                float: left;
+
+            }
+            .slide1{
+                width: 450px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .slide2{
+                width: 500px;
+                height: 100%;
+                background-color:azure;
+                float: left;
+
+            }.slide3{
+                width: 390px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .banner{
+
+            }
+            #menu{
+                background-color:#7d9aab;
+                width:1340px;
+                height:40px;
+                display: inline-block;
+                list-style: none;
+
+            }
+
+            #menu li{
+                float:left;
+                padding-right: 100px;
+                list-style:none;
+                
+            }
+            a:link{
+                color: white;
+                text-decoration: none;
+            }
+            a:visited{
+                color: white;
+            }
+
+            #b{
+                margin-left:1000px;
+                margin-right:350px;
+                float: right;
+
+            }
+
+            dt{
+                margin-left: 500px;
+            }
+            img{
+                margin-left: 0px;
+
+            }
+            #text{
+                width: 100%;
+                height:auto;
+                height: 350px;
+                
+            }
+
+
+        </style>
+    </h:head>
+    <h:body>
+        <div class="Background">
+            <div class="MainBlock">
+                <div class="banner">
+                    <img src="logo.PNG" width="1340px" height="90px" />
+
+
+                </div>
+                <div >
+                    <h:form>
+                    <center> 
+                    <p:menubar class="yy"  style="background: goldenrod">
+                        <p:menuitem value="Home" icon="ui-icon-home" outcome="home.xhtml"/>
+                        <p:menuitem value="About Us" icon="ui-icon-home" outcome="About.xhtml"/>
+                        <p:submenu label="Add Staff" icon="fa fa-fw fa-edit" >
+                        <p:menuitem value="Add admin" icon="ui-icon-person"  outcome="AdministratorForm" style="background: grey"/>
+                        <p:menuitem value="Add District officer" icon="ui-icon-person" outcome="districtOfficerForm" style="background: grey"/>
+                        <p:menuitem value="Add Sector officer" icon="ui-icon-person" outcome="sectorOfficerForm.xhtml" style="background: grey" />
+                        
+                    </p:submenu>
+                        
+                        <p:submenu label="List of  Staff" icon="fa fa-fw fa-edit">
+                           
+                            <p:menuitem value="Admin" icon="ui-icon-person" outcome="adminlist" style="background: grey" />
+                           
+                            <p:menuitem value="Dco" icon="ui-icon-person" outcome="dcolist" style="background: grey"/>
+                           
+                            <p:menuitem value="sco" icon="ui-icon-person" outcome="scolist" style="background: grey"/>
+                        </p:submenu>
+                        <p:menuitem value="List of cooperative approved" icon="ui-icon-home" outcome="AdminApprover.xhtml" />
+                         
+                        <p:menuitem value="Logout" icon="ui-icon-circle-close" onclick=" return confirm('Are you sure to Logout of the System?}')" style="background-color: red;" outcome="home.xhtml"/>
+                    </p:menubar>
+                </center>
+</h:form>
+                </div>
+            </div>
+
+        </div>
+        <div class="contain">
+               <h:form id="one" style="width: 100%;height: 20%;margin-top: 50px;">
+
+                 
+                        
+                <p:commandButton value="REPORT" icon="ui-icon-print" action="#{adminreport.createPDF(list)}" ajax="false"/>
+              
+              
+                    
+                   
+                        <p:panel header=" List Of Approved Request" >
+                            <p:dataTable value="#{login.approvedOnes}" var="requet" >
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <p:column headerText="tinno">
+                                    #{requet.tinno}
+                                </p:column>
+                                <p:column headerText="name" >
+                                    #{requet.name}
+                                </p:column>
+                                <p:column headerText="activity">
+                                    #{requet.activity}
+                                </p:column>
+                                <p:column headerText="Date">
+                                    #{requet.regdate}
+                                </p:column>
+                                <p:column headerText="membernumber">
+                                    #{requet.membernumber}
+                                </p:column>
+                                <p:column headerText="mission">
+                                    #{requet.mission}
+                                </p:column>
+                                <p:column headerText="vision">
+                                    #{requet.vision}
+                                </p:column> 
+                                <p:column headerText="type">
+                                    #{requet.type}
+                                </p:column>
+                                <p:column headerText="RequestedDate">
+                                    #{requet.requestDate}
+                                </p:column>
+                                <p:column headerText="RequestedBy">
+                                    <p:column headerText="RequesterInfo" style="width:100px;">
+                                <p:commandButton  icon="ui-icon-person" action="#{login.downloadCooperativeleader(requet.cooperativeleader)}" update="@widgetVar(det)" oncomplete="PF('det').show()"/>
+                                
+
+                            </p:column>
+                                </p:column>
+                                <p:column headerText="District officer">
+                                    <h:panelGroup>
+                                        <h:panelGroup rendered="#{requet.dco == null}">
+                                            Not Yet Considered
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{requet.dco != null}">
+                                            #{requet.dco.fname} #{requet.dco.lname}
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </p:column>
+                                <p:column headerText="sector Officer">
+                                    <h:panelGroup>
+                                        <h:panelGroup rendered="#{requet.sco == null}">
+                                            Not Approved
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{requet.sco != null}">
+                                            #{requet.sco.fname} #{requet.sco.lname}
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </p:column>
+                                <p:column headerText="Action" style="width: 100px;">
+                                    <p:commandButton value="Send" action="#{login.setCooperative(requet)}" onclick="PF('viewToSend').show()"
+                                                     update=":sendToForm" icon="ui-icon-document"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+
+                    
+            </h:form>
+
+            <h:form>
+                <h:form>
+                    <p:dialog showEffect="scale" hideEffect="scale" resizable="true" widgetVar="det" header="cooperativeleader Info">
+                        <h:panelGrid columns="2" >
+                            <h:outputLabel value="FirstName :"/>
+                            <h:outputLabel value="#{login.cooperativeleader.fname}"/>
+                            <h:outputLabel value="LastName :"/>
+                            <h:outputLabel value="#{login.cooperativeleader.lname}"/>
+                            <h:outputLabel value="PhoneNumber :"/>
+                            <h:outputLabel value="#{login.cooperativeleader.phone}"/>
+                            <h:outputLabel value="Email :"/>
+                            <h:outputLabel value="#{login.cooperativeleader.email}"/>
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
+                <p:dialog resizable="true" showEffect="clip" hideEffect="clip" widgetVar="reason">
+                    <f:facet name="header">
+                        Rejection reason
+                    </f:facet>
+                    <p:inputTextarea placeholder="Provide Rejection reason" cols="80" rows="8" value="#{login.cooperative.comment}"/><br/>
+                    <p:commandButton value="record" icon="ui-icon-check" style="margin-top:20px;" iconPos="right" oncomplete="PF('reson').close()" action="#{login.updateRrequest()}" update="@all"/>
+
+                </p:dialog>
+
+
+                
+                <script src="js/bootstrap.min.js"></script>
+            </h:form>
+
+            <p:dialog widgetVar="viewToSend" modal="true" showEffect="explode" hideEffect="slide">
+                 <h:form id="sendToForm" enctype="multipart/form-data">
+           <p:messages/>
+                    <h:panelGrid columns="2">
+                        
+                       
+                        <p:outputLabel value="Email"/>
+                        <p:inputText value="#{login.mail}"/>
+                        <p:outputLabel value="File name"/>
+                        <p:fileUpload value="#{login.filet}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="filea" required="true" validatorMessage="invalide"/>
+                        <h:commandButton value="send" action="#{login.sendEmail()}"/>
+                    </h:panelGrid>
+                </h:form>
+            </p:dialog>
+        </div>
+        <div   class="footer" style="margin-top: 300px">
+            <center>
+                <p><b style="color: #7096ab"> <h1>You are Most Welcome !!!</h1></b></p>
+                <h2 style="color: #7096ab" size="34px">Clemence Niyigena 2018 @AUCA ...</h2>
+            </center>
+
+        </div>
+
+    </h:body>
+</html>
+
+
+
+
+
+
+

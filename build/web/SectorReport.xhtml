@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Sector | Approver</title>
+    </h:head>
+    <h:head>
+        <title>Home Page</title>
+
+        <style>
+            .Background{
+                background-color: #85b2cb;
+                width:1340px;
+                height:auto;
+            }
+            .footer{
+
+
+                background-color: #0d3180;
+                width:1340px;
+                height:auto; 
+            }
+            .contain{
+                width: 1340px;
+                height: 600px;
+                background-color: silver;
+                float: left;
+
+            }
+            .slide1{
+                width: 450px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .slide2{
+                width: 500px;
+                height: 100%;
+                background-color:azure;
+                float: left;
+
+            }.slide3{
+                width: 390px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .banner{
+
+            }
+            #menu{
+                background-color:#7d9aab;
+                width:1340px;
+                height:40px;
+                display: inline-block;
+                list-style: none;
+
+            }
+
+            #menu li{
+                float:left;
+                padding-right: 100px;
+                list-style:none;
+                
+            }
+            a:link{
+                color: white;
+                text-decoration: none;
+            }
+            a:visited{
+                color: white;
+            }
+
+            #b{
+                margin-left:1000px;
+                margin-right:350px;
+                float: right;
+
+            }
+
+            dt{
+                margin-left: 500px;
+            }
+            img{
+                margin-left: 0px;
+
+            }
+            #text{
+                width: 100%;
+                height:auto;
+                height: 350px;
+                
+            }
+
+
+        </style>
+    </h:head>
+    <h:body>
+        <div class="Background">
+            <div class="MainBlock">
+                <div class="banner">
+                    <img src="logo.PNG" width="1340px" height="90px" />
+
+
+                </div>
+                 <center><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></center>
+                <div >
+                    <h:form>
+                    
+                   <center> 
+                      <p:menubar class="yy" style="background: goldenrod">
+                    <p:menuitem value="Home" icon="ui-icon-home" outcome="home.xhtml"/>
+                     <p:menuitem value="Report" icon="ui-icon-print"  outcome="SectorReport.xhtml"/>
+                     
+                    <p:menuitem value="Logout" icon="ui-icon-circle-close" onclick=" return confirm('Are you sure to Logout of the System?}')"  style="background-color: red;" outcome="home.xhtml"/>
+                </p:menubar>
+                  </center>
+</h:form>
+                </div>
+            </div>
+
+        </div>
+        <div class="contain">
+                 <p:growl  id="msg"/>
+               
+                    <p:growl life="5000" showDetail="false" autoUpdate="true"/>
+                   
+                        <div style="
+                             height: 20px;"/>
+                        <p:growl  autoUpdate="true" life="5000"/>
+                        <h:form>
+                        <p:dataTable value="#{login.pendingCooperative}" var="reque">
+                            <p:column headerText="Tinno">
+                                #{reque.tinno}
+                            </p:column>
+                            <p:column headerText="Name">
+                                #{reque.name}
+                            </p:column>
+                            <p:column headerText="Activity">
+                                #{reque.activity}
+                            </p:column>
+                            <p:column headerText="REgDate">
+                                #{reque.regdate}
+                            </p:column>
+                            <p:column headerText="member">
+                                #{reque.membernumber}
+                            </p:column>
+                            <p:column headerText="Mission">
+                                #{reque.mission}
+                            </p:column>
+                            <p:column headerText="Vision">
+                                #{reque.vision}
+                            </p:column>
+                            <p:column headerText="Investement">
+                                #{reque.investement}
+                            </p:column>
+                            <p:column headerText="Type">
+                                #{reque.type}
+                            </p:column>
+                            <p:column headerText="Request Date" style="width:100px;">
+                                <center>
+                                    #{reque.requestDate}
+                                </center>
+                            </p:column>
+
+
+
+                            <p:column headerText="Document" style="width:40px;">
+                                <center>
+                                    <p:commandButton icon="ui-icon-circle-arrow-s" id="bk" 
+                                                     onclick="PF('files').show()" style="border-radius: 50%;" action="#{login.viewFiles(reque)}" update=":files">
+                                        <f:ajax event="click" listener="#{login.addFileName()}" render="files"/>
+                                    </p:commandButton>
+                                
+                                </center>
+                            </p:column>
+                            <p:column headerText="Actions" style="width: 40px;">
+                                <center>
+                                    <p:commandButton icon="ui-icon-check" id="check" style="border-radius: 60%;" action="#{login.approverequest(reque)}" update="@all"/>
+                                    <p:tooltip value="Approve request" for="check" position = "left"/>
+                                    <p:commandButton icon="ui-icon-close" id="close" style="border-radius: 60%;" oncomplete="PF('reason').show()" action="#{login.downloadCooperative(reque)}"/>
+                                    <p:tooltip value="reject request" for="close" position= "top"/>
+                                </center>
+                            </p:column>
+                        </p:dataTable>
+                    
+           </h:form>
+
+            <h:form>
+                <p:dialog resizable="true" showEffect="clip" hideEffect="clip" widgetVar="reason">
+                    <f:facet name="header">
+                        Rejection reason
+                    </f:facet>
+                    <p:inputTextarea placeholder="Provide Rejection reason" cols="80" rows="8" value="#{login.cooperative.comment}"/><br/>
+                    <p:commandButton value="record" icon="ui-icon-check" style="margin-top:20px;" iconPos="right" oncomplete="PF('reson').close()" action="#{login.updateRrequest()}" update="@all"/>
+                </p:dialog>
+            </h:form>
+            
+            <p:dialog resizable="false" showEffect="slide" hideEffect="clip" widgetVar="files"
+                      header="All cooperative Files" onShow="#{login.loadi()}" style="width: 20px;">
+                <h:form id="files" style="width: 1000px">
+                    
+                    <p:outputLabel value="#{login.cooperative.name}"/>
+                    <p:commandButton action="#{login.addFileName()}" value="View Files" update="tableFile"/>
+                        <p:dataTable value="#{login.allFileNames}" var="files" id="tableFile">
+                            <p:column headerText="File name">
+                                <center>
+                                    #{files.name}
+                                </center>
+                            </p:column>
+                            <p:column headerText="cooperative name">
+                                <center>
+                                    #{login.cooperativeName}
+                                </center>
+                            </p:column>
+                            <p:column headerText="OPEN FILE" style="background: orange">
+                                <center>
+                                    <h:outputLink value="./userfiles/#{login.cooperativeName}/#{files.name}">
+                                        <p:outputLabel value="Open"/>
+                                    </h:outputLink>
+                                </center>
+                            </p:column>
+                            
+                    </p:dataTable>
+                </h:form>
+            </p:dialog>
+                        <p:toolbar style="font-size:  12px;margin-top: 400px; width: 300px;align-content: center" id="to">
+            
+                  <p:toolbarGroup  >
+                      <h:form >
+                    <center>
+                        <p:panelGrid columns="2">
+                       
+                            <p:selectOneMenu value="#{report.test}" style="width: 82%;">
+                            <f:selectItem itemLabel="Choose sector" noSelectionOption="true"/>
+                            <f:selectItems value="#{report.sectors}" var="s" itemLabel="#{s.sectname}" itemValue="#{s.sectname}"/>
+                        </p:selectOneMenu>
+                            <p:commandButton value="REPORT" action="#{report.createPDF()}" ajax="false"/>
+                    </p:panelGrid>
+                    </center>
+                </h:form>
+            </p:toolbarGroup>
+        </p:toolbar>
+     <p/>
+        </div>
+        <div   class="footer" style="margin-top: 300px">
+            <center>
+                <p><b style="color: #7096ab"> <h1>You are Most Welcome !!!</h1></b></p>
+                <h2 style="color: #7096ab" size="34px">Clemence Niyigena 2018 @AUCA ...</h2>
+            </center>
+
+        </div>
+
+    </h:body>
+</html>
+
+
+
+
+
+
+
+

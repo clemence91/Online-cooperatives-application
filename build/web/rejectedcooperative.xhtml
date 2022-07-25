@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <title>Rejected Form</title>
+            <style>
+                #first{
+                    background: url(images/test.png);
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    height: 90px;
+                    width: 95%;
+                    margin: auto;
+                    border:1px solid blueviolet;
+                    border-radius: 5px;
+                }
+                #third{
+                background: goldenrod;
+                    height: 50px;
+                    width: 100%;
+                    margin:auto;
+                    margin-top: 450px;
+                    text-align: center;
+                    border:1px solid black;
+                    border-radius: 5px;
+                }
+
+                #first .in{
+                    margin-top: 10px;
+                    margin-left: 30px;
+                    font-size: 3.4em;
+                    font-family: sans-serif;
+                }
+                .kiki{
+                    width: 95%;
+                    height: 500px;
+                    margin: auto;
+                    margin-top: 10px;
+                }
+                .matts{
+                    width: 94%;
+                    margin: auto;
+                    margin-top: 10px;
+                    height: 35px;
+                    border: 1px solid blueviolet;
+                }
+                .ui-panelgrid th{
+                    background-color: white  !important;
+                }
+
+            </style>
+        </h:head>
+        <h:body style="background: skyblue">
+            <h:form id="out">
+                <p:growl life="5000" showDetail="false" autoUpdate="true"/>
+                <div id="first">
+                    <img src="logo.PNG" height="90px" width="1490px"/>
+                </div>
+                <p:menubar styleClass="matts" style="background: goldenrod">
+                     <p:menuitem value="Home" icon="ui-icon-home"/>
+                     <p:menuitem value="Considered(#{login.approvedcoopera.size()})" icon="ui-icon-document" outcome="cooperativeApproval.xhtml"/>
+                     <p:menuitem value="Rejected(#{login.canceledOnes.size()})" icon="ui-icon-close" outcome="rejectedcooperative.xhtml"/>
+                     <p:menuitem value="Logout" icon="ui-icon-circle-close" onclick=" return confirm('Are you sure to Logout of the System?}')" style="background-color: red;" outcome="Login.xhtml"/>
+                </p:menubar>
+             
+                        
+                        <div style="height: 10px;"/>
+                        <p:dataTable value="#{login.canceledOnes}" var="reque" style="width:90%;margin: auto;">
+                           <p:column headerText="Tinno">
+                                #{reque.tinno}
+                            </p:column>
+                            <p:column headerText="Name">
+                                 #{reque.name}
+                            </p:column>
+                             <p:column headerText="Activity">
+                                 #{reque.activity}
+                            </p:column>
+                             <p:column headerText="REgDate">
+                                 #{reque.regdate}
+                            </p:column>
+                             <p:column headerText="member">
+                                 #{reque.membernumber}
+                            </p:column>
+                             <p:column headerText="Mission">
+                                 #{reque.mission}
+                            </p:column>
+                             <p:column headerText="Vision">
+                                 #{reque.vision}
+                            </p:column>
+                             <p:column headerText="Investement">
+                                 #{reque.investement}
+                            </p:column>
+                             <p:column headerText="Type">
+                                 #{reque.type}
+                            </p:column>
+                            <p:column headerText="RequestDate">
+                                 #{reque.requestDate}
+                            </p:column>
+                            <p:column headerText="RejectedBy">
+                                <center>
+                                    <p:commandButton  id="emp" icon="ui-icon-person" oncomplete="PF('boss').show()" action="#{login.downloadSco(reque.sco)}" update="@widgetVar(boss)"/>
+                                    <p:tooltip value="Sco Info" for="emp" position="left"/>
+                                </center>
+                            </p:column>
+                            <p:column headerText="Reason of Rejection" style="width: 200px;">
+                                #{reque.comment}
+                            </p:column>
+                        </p:dataTable>
+                    
+            
+            <h:form>
+                <p:dialog widgetVar="boss" showEffect="clip" hideEffect="clip" resizable="true" closable="true">
+                   
+                        <h:panelGrid columns="2" cellpadding="10" cellspacing="10">
+                        <h:outputLabel value="FirstName :"/>
+                        <h:outputLabel value="#{login.sco.fname}"/>
+                        <h:outputLabel value="LastName :"/>
+                        <h:outputLabel value="#{login.sco.lname}"/>
+                        <h:outputLabel value="PHONENUMBER:"/>
+                        <h:outputLabel value="#{login.sco.phoneNo}"/>
+                        <h:outputLabel value="email :"/>
+                        <h:outputLabel value="#{login.sco.email}"/>
+                        
+                    </h:panelGrid>
+                   
+                </p:dialog>
+            </h:form>
+            </h:form>
+            <div id="third"> 
+                    <h4 style="font-family: sans-serif; color: black"> Copy right Made By NIYIGENA CLEMENCE &copy; 2018 Allright Reserverd</h4>
+                </div>
+        </h:body>
+    </f:view>
+</html>

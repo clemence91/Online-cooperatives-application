@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>District | oFFICER | Account</title>
+    </h:head>
+    <h:head>
+        <title>Home Page</title>
+
+        <style>
+            .Background{
+                background-color: #85b2cb;
+                width:1340px;
+                height:auto;
+            }
+            .footer{
+
+
+                background-color: #0d3180;
+                width:1340px;
+                height:auto; 
+            }
+            .contain{
+                width: 1340px;
+                height: 400px;
+                background-color: silver;
+                float: left;
+
+            }
+            .slide1{
+                width: 450px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .slide2{
+                width: 500px;
+                height: 100%;
+                background-color:azure;
+                float: left;
+
+            }.slide3{
+                width: 390px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .banner{
+
+            }
+            #menu{
+                background-color:#7d9aab;
+                width:1340px;
+                height:40px;
+                display: inline-block;
+                list-style: none;
+
+            }
+
+            #menu li{
+                float:left;
+                padding-right: 100px;
+                list-style:none;
+                
+            }
+            a:link{
+                color: white;
+                text-decoration: none;
+            }
+            a:visited{
+                color: white;
+            }
+
+            #b{
+                margin-left:1000px;
+                margin-right:350px;
+                float: right;
+
+            }
+
+            dt{
+                margin-left: 500px;
+            }
+            img{
+                margin-left: 0px;
+
+            }
+            #text{
+                width: 100%;
+                height:auto;
+                height: 350px;
+                
+            }
+
+
+        </style>
+    </h:head>
+    <h:body>
+        <div class="Background">
+            <div class="MainBlock">
+                <div class="banner">
+                    <img src="logo.PNG" width="1340px" height="90px" />
+
+
+                </div>
+                <div >
+                   <center><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></center>
+                <div style="margin-top:5px;"></div>
+                <h:form>
+                <p:menubar  style=" margin-top: 5px;width: 100%;margin: auto; background:goldenrod" autoDisplay="true" >
+                     <p:menuitem value="Home" icon="ui-icon-home" outcome="home.xhtml"/>
+                    <p:menuitem value="AboutUs" icon="ui-icon-person"  outcome="About.xhtml"/>
+                    <p:submenu label="Create account" icon="fa fa-fw fa-edit">
+                        <p:menuitem value="Admin" icon="ui-icon-person"  outcome="AdminAccount.xhtml" style="background: grey"/>
+                        <p:menuitem value="District officer" icon="ui-icon-person" outcome="districtOfficerAccount.xhtml"  style="background: grey"/>
+                        <p:menuitem value="Sector officer" icon="ui-icon-person" outcome="sectorAccount.xhtml" style="background: grey" />
+                         <p:menuitem value="Cooperativeleader" icon="ui-icon-person" outcome="CooperativeleaderForm.xhtml" style="background: grey" />
+                    </p:submenu>
+                    <p:menuitem value="Login" icon="ui-icon-person"  outcome="Login.xhtml"/>
+                    
+                    <p:menuitem value="Logout" icon="ui-icon-circle-close"  onclick=" return confirm('Are you sure to Logout of the System?}')" style="background-color: red;" outcome="home.xhtml"/>
+                </p:menubar>
+</h:form>
+                </div>
+            </div>
+
+        </div>
+        <div class="contain">
+               <h:form>
+                        <p:growl  id="msg"/>
+               
+                    <p:growl life="5000" showDetail="false" autoUpdate="true"/>
+                   
+                        <div style="
+                             height: 20px;"/>
+                        <p:growl  autoUpdate="true" life="5000"/>
+                        
+               
+                        <center>
+                            <p:panel header="District Officer Registration" style="text-align: center;background: greenyellow;width:30%;margin-top:20px;border: 4px solid green;background: greenyellow">
+                                <center>
+
+                                    <h:panelGrid columns="2"  >
+  
+                                        <p:outputLabel value="PhoneNumber"/>
+                                        <p:inputText value="#{login.dco.phoneNo}" required="true" requiredMessage="Phone number is mandatory"/>
+                                        <p:outputLabel value="Username"/>
+                                        <p:inputText value="#{login.dco.username}" required="true"/>
+                                        <p:outputLabel value="Password"/>
+                                        <p:password value="#{login.dco.password}" required="true" id="password"
+                                        feedback="true"  weakLabel="weak password"
+                                        goodLabel="good password" strongLabel="strong password" requiredMessage="empty password" />
+                                        <p:outputLabel value="Confirm Password"/>
+                                        <p:password value="#{login.password}" id="confirm"
+                                        feedback="true"  weakLabel="weak password"
+                                        goodLabel="good password" strongLabel="strong password"
+                                        required="true" requiredMessage="empty Confirm"/>
+                                        <h:outputLabel value=""/>
+                                        <p:commandButton value="Save" icon="ui-icon-check" update="@form" process="@form" action="#{login.createAccountForDco()}"/>
+                                    </h:panelGrid>
+                                </center>
+                            </p:panel>
+                        </center>
+                    
+                    
+               </h:form>
+        </div>
+        <div   class="footer" style="margin-top: 300px">
+            <center>
+                <p><b style="color: #7096ab"> <h1>You are Most Welcome !!!</h1></b></p>
+                <h2 style="color: #7096ab" size="34px">Clemence Niyigena 2018 @AUCA ...</h2>
+            </center>
+
+        </div>
+
+    </h:body>
+</html>
+
+
+
+
+

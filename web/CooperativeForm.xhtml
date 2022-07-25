@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <title>cooperative Form</title>
+            <style>
+                #first{
+
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    height: 90px;
+                    width: 100%;
+                    margin: auto;
+                    border:1px solid black;
+                    border-radius: 5px;
+                }
+                #third{
+                    background: goldenrod;
+                    height: 50px;
+                    width: 100%;
+                    margin:auto;
+                    margin-top: 0px;
+                    text-align: center;
+                    border:1px solid black;
+                    border-radius: 5px;
+                }
+
+                #first .in{
+                    margin-top: 10px;
+                    margin-left: 30px;
+                    font-size: 3.4em;
+                    font-family: sans-serif;
+                }
+                .kiki{
+                    width: 95%;
+                    height: 500px;
+                    margin: auto;
+                    margin-top: 10px;
+                }
+                .matts{
+                    width: 94%;
+                    margin: auto;
+                    margin-top: 10px;
+                    height: 35px;
+                    border: 1px solid blueviolet;
+                }
+                .ui-panelgrid th{
+                    background-color: white  !important;
+                }
+
+            </style>
+        </h:head>
+        <h:body style="background: skyblue">
+            <h:form id="out" enctype="multipart/form-data">
+                <p:growl life="5000" showDetail="false" autoUpdate="true"/>
+                <div id="first">
+                    <img src="logo.PNG" height="90px" width="1490px"/>
+                </div>
+                <center>     <h4 id="jj"  style="color:green;">ONLINE COOPERATIVES REGISTRATION  MANAGEMENT INFORMATION SYSTEM</h4></center>
+                <p:menubar styleClass="matts"  style="background: goldenrod;border: 1px solid black;width: 100%">
+                    <p:menuitem value="Home" icon="ui-icon-home"/>
+                    <p:menuitem value="Considered(#{login.approvedcoopera.size()})" icon="ui-icon-document" outcome="cooperativeApproval.xhtml"/>
+                    <p:menuitem value="Rejected(#{login.canceledOnes.size()})" icon="ui-icon-close" outcome="rejectedForm.xhtml"/>
+                    <p:menuitem value="Logout" icon="ui-icon-circle-close" onclick=" return confirm('Are you sure to Logout of the System?}')" style="background-color: red;" outcome="home.xhtml"/>
+                </p:menubar>
+
+
+                <center>     <p:panel header="Cooperative Registration Form" style="width:45%;margin: auto;border: 4px solid green;background: greenyellow">
+                        <h:panelGrid columns="2" cellpadding="2" cellspacing="2">
+                            <h:outputLabel value="Tinno"/>
+                            <p:inputText value="#{login.cooperative.tinno}" title="Format:TIN100" required="true" requiredMessage="tin number is required">
+                             <f:validateLength minimum="6" maximum="6"/>
+                              <f:validateRegex pattern="[A-Z]{3}[0-9]{3}"/>
+                            </p:inputText>
+                            <h:outputLabel value="Name:"/>
+                            <p:inputText value="#{login.cooperativeName}" required="true" requiredMessage="cooperative name is required"/>
+                            <h:outputLabel value="activity:"/>
+                            <p:inputText value="#{login.cooperative.activity}" required="true" requiredMessage="activity is required"/>
+
+                             <h:outputLabel value="District Name:"/>
+                             <p:inputText value="#{login.districtName}" required="true" requiredMessage="Please enter district"/>
+                            <h:outputLabel value="Sector Name:"/>
+                            <p:inputText value="#{login.sectorName}" required="true" requiredMessage="please enter sector"/>
+                           
+                            <h:outputLabel value="member:"/>
+                            <p:inputText value="#{login.cooperative.membernumber}"  required="true" requiredMessage="please ente number of member">
+                                <f:validateLongRange minimum="10"/>
+                            </p:inputText>
+                            <h:outputLabel value="Mission:"/>
+                            <p:inputTextarea value="#{login.cooperative.mission}" required="true" requiredMessage="please writ your mission"/>
+                            <h:outputLabel value="Vision:"/>
+                            <p:inputTextarea value="#{login.cooperative.vision}" required="true" requiredMessage="please write your vision"/>
+                            <h:outputLabel value="Investement:"/>
+                            <p:inputText value="#{login.cooperative.investement}" required="true" requiredMessage="please enter investement"/>
+                            <h:outputLabel value="Type:"/>
+                          
+                            <p:selectOneMenu value="#{login.cooperative.type}" required="true" requiredMessage="please choose type">
+                                            <f:selectItem itemLabel="Choose Type" noSelectionOption="true"/>
+                                            <f:selectItem itemLabel="Federation"  itemValue="Federation"/>
+                                            <f:selectItem itemLabel="Sacco" itemValue="Sacco"/>
+                                            <f:selectItem itemLabel="Primary" itemValue="Primary"/>
+</p:selectOneMenu>
+                            
+                            <h:outputLabel value="Upload Documents"/>
+                            <p:fileUpload fileUploadListener="#{login.uploadFile}"
+                                          sizeLimit="5000000" multiple="false" 
+                                          fileLimit="5"/>
+                            <p:commandButton value="Save"  action="#{login.recordCooperative()}" update="@all" ajax="false"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </center>
+
+                <div style="height: 10px;"/>
+                <p:dataTable value="#{login.cooperatives}" var="reque" style="width:95%;margin: auto;">
+
+                    <p:column headerText="Tinno">
+                        #{reque.tinno}
+                    </p:column>
+                    <p:column headerText="Name">
+                        #{reque.name}
+                    </p:column>
+                    <p:column headerText="Activity">
+                        #{reque.activity}
+                    </p:column>
+                    <p:column headerText="REgDate">
+                        #{reque.regdate}
+                    </p:column>
+                    <p:column headerText="member">
+                        #{reque.membernumber}
+                    </p:column>
+                    <p:column headerText="Mission">
+                        #{reque.mission}
+                    </p:column>
+                    <p:column headerText="Vision">
+                        #{reque.vision}
+                    </p:column>
+                    <p:column headerText="Investement">
+                        #{reque.investement}
+                    </p:column>
+                    <p:column headerText="Type">
+                        #{reque.type}
+                    </p:column>
+                    <p:column headerText="RequestDate">
+                        #{reque.requestDate}
+                    </p:column>
+                    <p:column headerText="Request Status">
+                        <h:panelGroup>
+                            <h:panelGroup rendered="#{reque.approved == true}">
+                                Accepted
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{reque.approved == false}">
+                                Pending..
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+            <div id="third"> 
+                <h4 style="font-family: sans-serif; color: black"> Copy right Made By NIYIGENA CLEMENCE &copy; 2018 Allright Reserverd</h4>
+            </div>
+        </h:body>
+    </f:view>
+</html>
+

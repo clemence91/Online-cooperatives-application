@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Admin | Approver</title>
+    </h:head>
+    <h:head>
+        <title>Home Page</title>
+
+        <style>
+            .Background{
+                background-color: #85b2cb;
+                width:1340px;
+                height:auto;
+            }
+            .footer{
+
+
+                background-color: #0d3180;
+                width:1340px;
+                height:auto; 
+            }
+            .contain{
+                width: 1340px;
+                height: 500px;
+                background-color: silver;
+                float: left;
+
+            }
+            .slide1{
+                width: 450px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .slide2{
+                width: 500px;
+                height: 100%;
+                background-color:azure;
+                float: left;
+
+            }.slide3{
+                width: 390px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .banner{
+
+            }
+            #menu{
+                background-color:#7d9aab;
+                width:1340px;
+                height:40px;
+                display: inline-block;
+                list-style: none;
+
+            }
+
+            #menu li{
+                float:left;
+                padding-right: 100px;
+                list-style:none;
+                
+            }
+            a:link{
+                color: white;
+                text-decoration: none;
+            }
+            a:visited{
+                color: white;
+            }
+
+            #b{
+                margin-left:1000px;
+                margin-right:350px;
+                float: right;
+
+            }
+
+            dt{
+                margin-left: 500px;
+            }
+            img{
+                margin-left: 0px;
+
+            }
+            #text{
+                width: 100%;
+                height:auto;
+                height: 350px;
+                
+            }
+
+
+        </style>
+    </h:head>
+    <h:body>
+        <div class="Background">
+            <div class="MainBlock">
+                <div class="banner">
+                    <img src="logo.PNG" width="1340px" height="90px" />
+
+
+                </div>
+                <div >
+                    <h:form>
+                    <center> 
+                    <p:menubar class="yy"  style="background: goldenrod">
+                        <p:menuitem value="Home" icon="ui-icon-home" outcome="home.xhtml"/>
+                        <p:menuitem value="About Us" icon="ui-icon-home" outcome="Aboutus.xhtml"/>
+                        <p:submenu label="Add Staff" icon="fa fa-fw fa-edit" >
+                        <p:menuitem value="Add admin" icon="ui-icon-person"  outcome="AdministratorForm" style="background: grey"/>
+                        <p:menuitem value="Add District officer" icon="ui-icon-person" outcome="districtOfficerForm" style="background: grey"/>
+                        <p:menuitem value="Add Sector officer" icon="ui-icon-person" outcome="sectorOfficerForm.xhtml" style="background: grey" />
+                        
+                    </p:submenu>
+                        
+                        <p:submenu label="List of  Staff" icon="fa fa-fw fa-edit">
+                           
+                            <p:menuitem value="Admin" icon="ui-icon-person" outcome="adminlist" style="background: grey" />
+                           
+                            <p:menuitem value="Dco" icon="ui-icon-person" outcome="dcolist" style="background: grey"/>
+                           
+                            <p:menuitem value="sco" icon="ui-icon-person" outcome="scolist" style="background: grey"/>
+                        </p:submenu>
+                        <p:menuitem value="List of cooperative approved" icon="ui-icon-home" outcome="AdminApprover.xhtml" />
+                         
+                        <p:menuitem value="Logout" icon="ui-icon-circle-close" onclick=" return confirm('Are you sure to Logout of the System?}')" style="background-color: red;" outcome="home.xhtml"/>
+                    </p:menubar>
+                </center>
+</h:form>
+                </div>
+            </div>
+
+        </div>
+        <div class="contain">
+           
+                 <h:form>
+                     <p:dataTable  value="#{login.lis}" var="r" style="height: 200px">
+
+                    <p:column>
+                        <f:facet name="header">Names</f:facet>
+                            #{r.fname} #{r.lname}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">access</f:facet>
+                            #{r.access}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">phone</f:facet>
+                            #{r.phoneNo
+}
+                    </p:column>
+                    
+
+
+
+                    <p:column headerText="Status">
+                        #{r.status}
+                    </p:column>
+                         <p:column headerText="ACTION" style="background: orange">
+                        <h:commandLink action="#{login.cancelsco(r)}" value="#{r.action}"/>
+
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+                                
+                                
+        </div>
+        <div   class="footer" style="margin-top: 300px">
+            <center>
+                <p><b style="color: #7096ab"> <h1>You are Most Welcome !!!</h1></b></p>
+                <h2 style="color: #7096ab" size="34px">Clemence Niyigena 2018 @AUCA ...</h2>
+            </center>
+
+        </div>
+
+    </h:body>
+</html>
+
+
+
+
+
+
+
+
+

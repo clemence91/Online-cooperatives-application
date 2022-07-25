@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>New | Cooperative </title>
+    </h:head>
+    <h:head>
+        <title>Home Page</title>
+
+        <style>
+            .Background{
+                background-color: #85b2cb;
+                width:1340px;
+                height:auto;
+            }
+            .footer{
+
+
+                background-color: #0d3180;
+                width:1340px;
+                height:auto; 
+            }
+            .contain{
+                width: 1340px;
+                height: 780px;
+                background-color: silver;
+                float: left;
+
+            }
+            .slide1{
+                width: 450px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .slide2{
+                width: 500px;
+                height: 100%;
+                background-color:azure;
+                float: left;
+
+            }.slide3{
+                width: 390px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .banner{
+
+            }
+            #menu{
+                background-color:#7d9aab;
+                width:1340px;
+                height:40px;
+                display: inline-block;
+                list-style: none;
+
+            }
+
+            #menu li{
+                float:left;
+                padding-right: 100px;
+                list-style:none;
+                
+            }
+            a:link{
+                color: white;
+                text-decoration: none;
+            }
+            a:visited{
+                color: white;
+            }
+
+            #b{
+                margin-left:1000px;
+                margin-right:350px;
+                float: right;
+
+            }
+
+            dt{
+                margin-left: 500px;
+            }
+            img{
+                margin-left: 0px;
+
+            }
+            #text{
+                width: 100%;
+                height:auto;
+                height: 350px;
+                
+            }
+
+
+        </style>
+    </h:head>
+    <h:body>
+        <div class="Background">
+            <div class="MainBlock">
+                <div class="banner">
+                    <img src="logo.PNG" width="1340px" height="90px" />
+
+
+                </div>
+                 <center><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></center>
+                <div >
+                    <h:form>
+                        <center>
+                    <p:menubar styleClass="matts"  style="background: goldenrod;">
+                        <p:menuitem value="Home" icon="ui-icon-home" outcome="home.xhtml"/>
+                        <p:menuitem value="About Us" icon="ui-icon-home" outcome="About.xhtml"/>
+                    <p:menuitem value="Considered(#{login.approvedcoopera.size()})" icon="ui-icon-document" outcome="cooperativeApproval.xhtml"/>
+                    <p:menuitem value="Rejected(#{login.canceledOnes.size()})" icon="ui-icon-close" outcome="rejectedForm.xhtml"/>
+                    <p:menuitem value="Logout" icon="ui-icon-circle-close" onclick=" return confirm('Are you sure to Logout of the System?}')" style="background-color: red;" outcome="home.xhtml"/>
+                </p:menubar>
+                        </center>
+</h:form>
+                </div>
+            </div>
+
+        </div>
+        <div class="contain">
+               <p:growl  id="msg"/>
+               
+                    <p:growl life="5000" showDetail="false" autoUpdate="true"/>
+                   
+                        <div style="
+                             height: 20px;"/>
+                        <p:growl  autoUpdate="true" life="5000"/>
+                        <h:form id="out" enctype="multipart/form-data">
+                 
+                        
+                <center>     <p:panel header="Cooperative Registration Form" style="width:45%;margin: auto;border: 4px solid green;background: greenyellow">
+                        <h:panelGrid columns="2" cellpadding="2" cellspacing="2">
+                            <h:outputLabel value="Tinno"/>
+                            <p:inputText value="#{login.cooperative.tinno}" title="Format:TIN100" required="true" requiredMessage="tin number is required">
+                             <f:validateLength minimum="6" maximum="6"/>
+                              <f:validateRegex pattern="[A-Z]{3}[0-9]{3}"/>
+                            </p:inputText>
+                            <h:outputLabel value="Name:"/>
+                            <p:inputText value="#{login.cooperativeName}" required="true" requiredMessage="cooperative name is required"/>
+                            <h:outputLabel value="activity:"/>
+                            <p:inputText value="#{login.cooperative.activity}" required="true" requiredMessage="activity is required"/>
+
+                             <h:outputLabel value="District Name:"/>
+                             <p:inputText value="#{login.districtName}" required="true" requiredMessage="Please enter district"/>
+                            <h:outputLabel value="Sector Name:"/>
+                            <p:inputText value="#{login.sectorName}" required="true" requiredMessage="please enter sector"/>
+                           
+                            <h:outputLabel value="member:"/>
+                            <p:inputText value="#{login.cooperative.membernumber}"  required="true" requiredMessage="please ente number of member">
+                                <f:validateLongRange minimum="10"/>
+                            </p:inputText>
+                            <h:outputLabel value="Mission:"/>
+                            <p:inputTextarea value="#{login.cooperative.mission}" required="true" requiredMessage="please writ your mission"/>
+                            <h:outputLabel value="Vision:"/>
+                            <p:inputTextarea value="#{login.cooperative.vision}" required="true" requiredMessage="please write your vision"/>
+                            <h:outputLabel value="Investement:"/>
+                            <p:inputText value="#{login.cooperative.investement}" required="true" requiredMessage="please enter investement"/>
+                            <h:outputLabel value="Type:"/>
+                          
+                            <p:selectOneMenu value="#{login.cooperative.type}" required="true" requiredMessage="please choose type">
+                                            <f:selectItem itemLabel="Choose Type" noSelectionOption="true"/>
+                                            <f:selectItem itemLabel="Federation"  itemValue="Federation"/>
+                                            <f:selectItem itemLabel="Sacco" itemValue="Sacco"/>
+                                            <f:selectItem itemLabel="Primary" itemValue="Primary"/>
+</p:selectOneMenu>
+                            
+                            <h:outputLabel value="Upload Documents"/>
+                            <p:fileUpload fileUploadListener="#{login.uploadFile}"
+                                          sizeLimit="5000000" multiple="false" 
+                                          fileLimit="5"/>
+                            <p:commandButton value="Save"  action="#{login.recordCooperative()}" update="@all" ajax="false"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </center>
+
+                <div style="height: 10px;"/>
+                <p:dataTable value="#{login.cooperatives}" var="reque" style="width:95%;margin: auto;">
+
+                    <p:column headerText="Tinno">
+                        #{reque.tinno}
+                    </p:column>
+                    <p:column headerText="Name">
+                        #{reque.name}
+                    </p:column>
+                    <p:column headerText="Activity">
+                        #{reque.activity}
+                    </p:column>
+                    <p:column headerText="REgDate">
+                        #{reque.regdate}
+                    </p:column>
+                    <p:column headerText="member">
+                        #{reque.membernumber}
+                    </p:column>
+                    <p:column headerText="Mission">
+                        #{reque.mission}
+                    </p:column>
+                    <p:column headerText="Vision">
+                        #{reque.vision}
+                    </p:column>
+                    <p:column headerText="Investement">
+                        #{reque.investement}
+                    </p:column>
+                    <p:column headerText="Type">
+                        #{reque.type}
+                    </p:column>
+                    <p:column headerText="RequestDate">
+                        #{reque.requestDate}
+                    </p:column>
+                    <p:column headerText="Request Status">
+                        <h:panelGroup>
+                            <h:panelGroup rendered="#{reque.approved == true}">
+                                Accepted
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{reque.approved == false}">
+                                Pending..
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
+        <div   class="footer" style="margin-top: 300px">
+            <center>
+                <p><b style="color: #7096ab"> <h1>You are Most Welcome !!!</h1></b></p>
+                <h2 style="color: #7096ab" size="34px">Clemence Niyigena 2018 @AUCA ...</h2>
+            </center>
+
+        </div>
+
+    </h:body>
+</html>
+
+
+
+
+

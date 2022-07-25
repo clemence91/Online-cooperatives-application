@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cooperativeleader | Registration</title>
+    </h:head>
+    <h:head>
+        <title>Home Page</title>
+
+        <style>
+            .Background{
+                background-color: #85b2cb;
+                width:1340px;
+                height:auto;
+            }
+            .footer{
+
+
+                background-color: #0d3180;
+                width:1340px;
+                height:auto; 
+            }
+            .contain{
+                width: 1340px;
+                height: 600px;
+                background-color: silver;
+                float: left;
+
+            }
+            .slide1{
+                width: 450px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .slide2{
+                width: 500px;
+                height: 100%;
+                background-color:azure;
+                float: left;
+
+            }.slide3{
+                width: 390px;
+                height: 100%;
+                background-color:#7096ab;
+                float: left;
+
+            }
+            .banner{
+
+            }
+            #menu{
+                background-color:#7d9aab;
+                width:1340px;
+                height:40px;
+                display: inline-block;
+                list-style: none;
+
+            }
+
+            #menu li{
+                float:left;
+                padding-right: 100px;
+                list-style:none;
+                
+            }
+            a:link{
+                color: white;
+                text-decoration: none;
+            }
+            a:visited{
+                color: white;
+            }
+
+            #b{
+                margin-left:1000px;
+                margin-right:350px;
+                float: right;
+
+            }
+
+            dt{
+                margin-left: 500px;
+            }
+            img{
+                margin-left: 0px;
+
+            }
+            #text{
+                width: 100%;
+                height:auto;
+                height: 350px;
+                
+            }
+
+
+        </style>
+    </h:head>
+    <h:body>
+        <div class="Background">
+            <div class="MainBlock">
+                <div class="banner">
+                    <img src="logo.PNG" width="1340px" height="90px" />
+
+
+                </div>
+                 <center><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></center>
+                <div >
+                      <center> 
+                   <h:form>
+                 
+                <p:menubar class="yy" style="background: goldenrod">
+                    <p:menuitem value="Home" icon="ui-icon-home" outcome="home.xhtml" />
+                    
+                    <p:menuitem value="About Us" icon="ui-icon-book" outcome="About.xhtml"/>
+      
+                    <p:menuitem value="Logout" icon="ui-icon-circle-close" onclick=" return confirm('Are you sure to Logout of the System?}')" style="background-color: red;" outcome="home.xhtml"/>
+                </p:menubar>
+                 
+                
+</h:form>
+</center>
+                </div>
+            </div>
+
+        </div>
+        <div class="contain">
+                <p:growl  id="msg"/>
+               
+                    <p:growl life="5000" showDetail="false" autoUpdate="true"/>
+                   
+                        <div style="
+                             height: 20px;"/>
+                        <p:growl  autoUpdate="true" life="5000"/>
+                        
+                        <center>
+                           <h:form>
+                        <p:panel header="cooperativerleaderform" style="width: 400px ;border: 4px solid green;background: greenyellow">
+                                    <h:panelGrid columns="2" >
+
+                                        <p:outputLabel value="NationalId :"/>
+                                        <p:inputMask mask="9 9999 9 9999999 9 99" maxlength="21" value="#{login.cooperativeleader.nationalId}">
+                                            <f:validateLength maximum = "21" minimum="21"/>
+                                        </p:inputMask>
+                                        <p:outputLabel value="FirstName : "/>
+                                        <p:inputText value="#{login.cooperativeleader.fname}" required="true" requiredMessage="First name is mandatory"/>
+                                        <p:outputLabel value="LastName :"/>
+                                        <p:inputText value="#{login.cooperativeleader.lname}" required="true" requiredMessage="Last name is mandatory"/>
+                                        <p:outputLabel value="Gender"/>
+                                        <p:selectOneMenu value="#{login.cooperativeleader.gender}">
+                                            <f:selectItem itemLabel="Male" itemValue="Male"/>
+                                            <f:selectItem itemLabel="Female" itemValue="Female"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="District"/>
+                                       <p:selectOneMenu value="#{login.name1}"  style="width: 82%;" required="true" requiredMessage="selct district is mandatory">
+                            <f:selectItem itemLabel="Choose District" noSelectionOption="true"/>
+                            <f:selectItems value="#{login.districts}" var="s" itemLabel="#{s.distname}" itemValue="#{s.distname}"/>
+                       <p:ajax listener="#{login.fillSectors()}" update="mose"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="sector"/>
+                        <p:selectOneMenu value="#{login.test}" id="mose">
+                            <f:selectItem itemLabel="Choose sector" noSelectionOption="true"/>
+                            <f:selectItems value="#{login.sectors}" var="s" itemLabel="#{s.sectname}" itemValue="#{s.sectname}"/>
+                        </p:selectOneMenu>
+                                        <p:outputLabel value="PhoNumber"/>
+                                        <p:inputText value="#{login.cooperativeleader.phone}" required="true" requiredMessage="Phone number is mandatory"/>
+                                        <p:outputLabel value="DateOfBirht"/>
+                                        <p:calendar pattern="dd/MM/yyyy" value="#{login.cooperativeleader.dob}" required="true" requiredMessage="Date of birth is mandatory"/>
+                                    
+                                   
+                                        <p:outputLabel value="Email"/>
+                                        <p:inputText value="#{login.cooperativeleader.email}" required="true" requiredMessage="Email is mandatory"/>
+
+                                        <p:outputLabel value="Username"/>
+                                        <p:inputText value="#{login.cooperativeleader.username}" required="true" requiredMessage="Username is mandatory"/>
+                                        <p:outputLabel value="Password"/>
+                                        <p:password value="#{login.cooperativeleader.password}" required="true" requiredMessage="Password is mandatory"/>
+                                        <p:outputLabel value="Confirm Password"/>
+                                        <p:password value="#{login.password}" required="true" requiredMessage="First confirm password"/>
+                                        <p:commandButton value="Save"  icon="ui-icon-disk"  action="#{login.recordCooerativerleader()}"/>
+                                    </h:panelGrid>
+                            </p:panel>
+                           </h:form>
+                        </center>
+                               
+                           
+
+
+        </div>
+        <div   class="footer" style="margin-top: 300px">
+            <center>
+                <p><b style="color: #7096ab"> <h1>You are Most Welcome !!!</h1></b></p>
+                <h2 style="color: #7096ab" size="34px">Clemence Niyigena 2018 @AUCA ...</h2>
+            </center>
+
+        </div>
+
+    </h:body>
+</html>
+
+
+
+
+
+
+
